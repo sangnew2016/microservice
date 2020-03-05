@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
+const spdy = require('spdy');
 const api = require('../api/cinema-catalog');
 
 const start = (options) => {
@@ -25,7 +26,13 @@ const start = (options) => {
 
         api(app, options);
 
-        const server = app.listen(options.port, () => resolve(server));
+        // here is where we made the modifications, we create a spdy
+        // server, then we pass the ssl certs, and the express app
+        const server = spdy
+            .createServer(options.ssl, app)
+            .listen(options.port, () => resolve(server));
+        
+        //const server = app.listen(options.port, () => resolve(server));
     });
 };
 

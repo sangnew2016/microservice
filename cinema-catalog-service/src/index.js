@@ -32,11 +32,13 @@ mediator.on('db.ready', (db) => {
         console.log('Connected. Starting server');
         rep = repo;
 
+        // here we pass the ssl options to the server.js file
         return server.start({
-            port: config.serverSettings.port,
+            port: config.serverSettings.port,            
             ssl: config.serverSettings.ssl,
             repo
         });
+        
     }).then(app => {
         console.log(`Server started successfully, running on port: ${config.serverSettings.port}.`);
         app.on('close', () => {
