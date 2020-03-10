@@ -1,5 +1,5 @@
 const dbSettings = {
-    db: process.env.DB || 'cinemas',
+    db: process.env.DB || 'sv_cinemas',
     user: process.env.DB_USER || 'admin',
     pass: process.env.DB_PASS || '123456789',
     repl: process.env.DB_REPLS || 'rs1',
